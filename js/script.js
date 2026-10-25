@@ -14,9 +14,20 @@ const TXT=[
 ];
 const NOMSG=['','โหหแฟน เค้าเข้าใจนะ… แต่ขออีกครั้งได้มั้ยคะคนสวย 🥺','คนสวยจะไม่ให้เค้าจริงหย๋ออ นะคะะะแฟนขาาา','โอเคค่ะๆ แค่อยากให้เธอรู้ว่าเค้าขอโทษจริง ๆ นะคะ','เธอเลือกได้ตามความรู้สึกของเธอเลยนะ เค้าจะเคารพการตัดสินใจของเธอค่ะ'];
 
-/* ---------- audio (files optional: audio/story.mp3, audio/ending.mp3) ---------- */
+
+/* ---------- audio ---------- */
 const A={cur:null};
-['s','e'].forEach((k,i)=>{const a=new Audio();a.loop=true;a.preload='none';a.src=i?'audio/ending.mp3':'audio/story.mp3';a.volume=0;A[k]=a});
+['s','e'].forEach((k,i)=>{
+  const a=new Audio();
+  a.loop=true;
+  a.preload='none';
+  a.src=i
+    ? 'audio/piano.mp3.mp3'
+    : 'audio/fantasy.mp3.mp3';
+  a.volume=0;
+  A[k]=a;
+});
+
 function fade(a,to,ms,pause){clearInterval(a._t);const f=a.volume,t0=Date.now();a._t=setInterval(()=>{const k=Math.min(1,(Date.now()-t0)/ms);try{a.volume=Math.max(0,Math.min(1,f+(to-f)*k))}catch(e){}if(k>=1){clearInterval(a._t);if(pause&&to===0)a.pause()}},60)}
 function play(k){try{A.cur=k;const o=A[k==='s'?'e':'s'];fade(o,0,1800,true);const r=A[k].play();if(r&&r.catch)r.catch(()=>{});fade(A[k],S.muted?0:.35,2200)}catch(e){}}
 function mute(){S.muted=!S.muted;if(A.cur)fade(A[A.cur],S.muted?0:.35,300,false);const b=$('#mute');b.textContent=S.muted?'🔇':'🔊';b.setAttribute('aria-label',S.muted?'เปิดเสียงเพลง':'ปิดเสียงเพลง')}
