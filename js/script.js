@@ -21,9 +21,7 @@ const A={cur:null};
   const a=new Audio();
   a.loop=true;
   a.preload='none';
-  a.src=i
-    ? 'audio/piano.mp3.mp3'
-    : 'audio/fantasy.mp3.mp3';
+  a.src = i ? 'audio/ending.mp3' : 'audio/story.mp3';
   a.volume=0;
   A[k]=a;
 });
